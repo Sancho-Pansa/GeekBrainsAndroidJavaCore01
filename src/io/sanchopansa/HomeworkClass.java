@@ -11,6 +11,27 @@ public class HomeworkClass {
         double doubleVar = 0.25;
         char charVar = 'a';
         boolean booleanVar = true;
+
+        // 3
+        System.out.println(operatorDemonstration(floatVar, floatVar, floatVar, floatVar));
+
+        // 4
+        System.out.println(isInRange(intVar, 2));
+
+        // 5
+        sgn(intVar);
+
+        // 6
+        System.out.println(isNegative(intVar));
+
+        // 7
+        printHello("Vadim");
+
+        // 8
+        System.out.println(isLeapYear(2020));
+        System.out.println(isLeapYear(5));
+        System.out.println(isLeapYear(200));
+        System.out.println(isLeapYear(1600));
     }
 
     public static float operatorDemonstration(float a, float b, float c, float d) {
