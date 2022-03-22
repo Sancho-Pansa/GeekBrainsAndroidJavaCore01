@@ -32,4 +32,9 @@ public class HomeworkClass {
     public static boolean isNegative(int a) {
         return a < 0;
     }
+
+    public static void printHello(String name) {
+        System.out.println("Привет, " + name + "!");
+        // System.out.printf("Привет, %s!", name);
+    }
 }
