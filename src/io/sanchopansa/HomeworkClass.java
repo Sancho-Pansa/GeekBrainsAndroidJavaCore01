@@ -16,4 +16,9 @@ public class HomeworkClass {
     public static float operatorDemonstration(float a, float b, float c, float d) {
         return a * (b + (c / d));
     }
+
+    public static boolean isInRange(int a, int b) {
+        int sum = a + b;
+        return sum >= 10 && sum <= 20;
+    }
 }
