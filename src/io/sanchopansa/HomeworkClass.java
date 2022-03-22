@@ -37,4 +37,8 @@ public class HomeworkClass {
         System.out.println("Привет, " + name + "!");
         // System.out.printf("Привет, %s!", name);
     }
+
+    public static boolean isLeapYear(int year) {
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    }
 }
