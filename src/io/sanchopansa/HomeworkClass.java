@@ -12,4 +12,8 @@ public class HomeworkClass {
         char charVar = 'a';
         boolean booleanVar = true;
     }
+
+    public static float operatorDemonstration(float a, float b, float c, float d) {
+        return a * (b + (c / d));
+    }
 }
