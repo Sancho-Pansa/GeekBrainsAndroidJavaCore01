@@ -20,5 +20,10 @@ public class HomeworkClass {
     public static boolean isInRange(int a, int b) {
         int sum = a + b;
         return sum >= 10 && sum <= 20;
+        /* Если обязательно использовать if
+        if(sum >= 10 && sum <=20)
+            return true;
+        return false;
+         */
     }
 }
