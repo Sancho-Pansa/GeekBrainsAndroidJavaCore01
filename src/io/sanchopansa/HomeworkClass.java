@@ -1,6 +1,7 @@
 package io.sanchopansa;
 
 public class HomeworkClass {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         // Примитивные типы
         byte byteVar = 5;
