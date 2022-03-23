@@ -1,4 +1,4 @@
-package io.sanchopansa;
+package io.sanchopansa.lesson01;
 
 public class HomeworkClass {
     @SuppressWarnings("unused")
