@@ -4,15 +4,30 @@ import java.util.Arrays;
 
 public class HomeworkClass {
     public static void main(String[] args) {
+        System.out.println("#1");
         invertZeroOne();
+
+        System.out.println("#2");
         fillArray();
+
+        System.out.println("#3");
         multiplyLessThanSix();
+
+        System.out.println("#4");
         createIdentityMatrix();
+
+        System.out.println("#5");
         findMinMaxInArray();
+
+        System.out.println("#6");
         final int[] balancedArray = {5, 3, 4, 17, -5}; // 4 || 17
         final int[] unbalancedArray = {5, 3, 4, 17, -4};
         System.out.println(checkBalance(balancedArray));
         System.out.println(checkBalance(unbalancedArray));
+
+        System.out.println("#7");
+        final int[] array = {1,2,3,4,5,6,7};
+        shiftArray(array, 3);
     }
 
     public static void invertZeroOne() {
@@ -42,7 +57,7 @@ public class HomeworkClass {
             if(array[i] < 6)
                 array[i] = array[i] * 2;
         }
-        // array = Arrays.stream(array).map(x -> x<6 ? x*2 : x).toArray();
+        // Или array = Arrays.stream(array).map(x -> x<6 ? x*2 : x).toArray();
         System.out.println(Arrays.toString(array));
     }
 
@@ -84,5 +99,53 @@ public class HomeworkClass {
                 return true;
         }
         return false;
+    }
+
+    public static void shiftArray(int[] array, int n) {
+        if(n == array.length)
+            return;
+        if(n > array.length)
+            n = n % array.length;
+        int gcd = gcd(array.length, n);
+        for(int i = 0; i < gcd; i++) {
+            int t1 = array[i];
+            int j = i;
+            do {
+                int t2 = array[(j + n) % array.length];
+                array[(j + n) % array.length] = t1;
+                t1 = t2;
+                j = (j + n) % array.length;
+                System.out.println(Arrays.toString(array));
+            } while(j != i);
+        }
+        /*if(gcd == 1) {
+            System.out.println(Arrays.toString(array));
+            int i = 0;
+            int t1 = array[0];
+            do {
+                int t2 = array[(i + n) % array.length];
+                array[(i + n) % array.length] = t1;
+                t1 = t2;
+                i = (i + n) % array.length;
+                System.out.println(Arrays.toString(array));
+            } while(i != 0);
+        } else {
+            for(int i = 0; i < gcd; i++) {
+                int t1 = array[i];
+                int j = i;
+                do {
+                    int t2 = array[(j + n) % array.length];
+                    array[(j + n) % array.length] = t1;
+                    t1 = t2;
+                    j = (j + n) % array.length;
+                    System.out.println(Arrays.toString(array));
+                } while(j != i);
+            }
+        }*/
+        System.out.println(Arrays.toString(array));
+    }
+    private static int gcd(int a, int b) {
+        if(b == 0) return a;
+        return gcd(b,a % b);
     }
 }
