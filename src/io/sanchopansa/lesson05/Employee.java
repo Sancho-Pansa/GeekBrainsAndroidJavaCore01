@@ -31,6 +31,10 @@ public class Employee {
         this.monthlyWage = monthlyWage;
     }
 
+    public int getAge() {
+        return this.age;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Employee\n");
