@@ -31,7 +31,6 @@ public class HomeworkClass {
                 "Кранодар",
                 "Пятигорск"
         };
-
         System.out.println("Task 1");
 
         List<String> nameList = new ArrayList<>(Arrays.asList(wordArray));

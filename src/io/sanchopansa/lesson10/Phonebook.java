@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Phonebook<T extends String, E extends String> {
-    private List<T> phones;
-    private List<E> names;
+    private final List<T> phones;
+    private final List<E> names;
 
     public Phonebook() {
         this.phones = new ArrayList<>();
