@@ -4,6 +4,11 @@ import java.util.*;
 
 public class HomeworkClass {
     public static void main(String[] args) {
+        task01();
+        task02();
+    }
+
+    public static void task01() {
         String[] wordArray = {
                 "Москва",
                 "Санкт-Петербург",
@@ -27,6 +32,8 @@ public class HomeworkClass {
                 "Пятигорск"
         };
 
+        System.out.println("Task 1");
+
         List<String> nameList = new ArrayList<>(Arrays.asList(wordArray));
         // nameList.stream().distinct().forEach(System.out::println);
         Set<String> nameSet = new HashSet<>(nameList);
@@ -43,7 +50,7 @@ public class HomeworkClass {
         }
     }
 
-    public static int countRepeats(List<String> list, String value) {
+    private static int countRepeats(List<String> list, String value) {
         if(!list.contains(value))
             return 0;
         int counter = 0;
@@ -52,5 +59,19 @@ public class HomeworkClass {
                 counter++;
         }
         return counter;
+    }
+
+    public static void task02() {
+        System.out.println("\nTask 2");
+        Phonebook<String, String> phonebook = new Phonebook<>();
+        phonebook.add("1001", "Иванов");
+        phonebook.add("1002", "Петров");
+        phonebook.add("1003", "Иванов");
+        phonebook.add("1004", "Кузнецов");
+
+        System.out.println("Петров:");
+        phonebook.get("Петров");
+        System.out.println("\nИванов:");
+        phonebook.get("Иванов");
     }
 }
