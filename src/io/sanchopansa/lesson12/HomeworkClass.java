@@ -1,6 +1,7 @@
 package io.sanchopansa.lesson12;
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HomeworkClass {
     private static final int SIZE = 10000000;
@@ -29,39 +30,53 @@ public class HomeworkClass {
         float[] array = new float[SIZE];
         Arrays.fill(array, 1f);
 
-        long timer = System.currentTimeMillis();
         final Object monitor = new Object();
+        AtomicBoolean isFirstReady = new AtomicBoolean(false);
+        AtomicBoolean isSecondReady = new AtomicBoolean(false);
+
+        long timer = System.currentTimeMillis();
 
         float[] firstHalf = Arrays.copyOf(array, HALF);
         float[] secondHalf = Arrays.copyOfRange(array, HALF, SIZE);
-        new Thread(() -> {
-            synchronized(monitor) {
-                for (int i = 0; i < HALF; i++)
-                    firstHalf[i] = formula(firstHalf[i], i);
-                System.arraycopy(firstHalf, 0, array, 0, HALF);
-                monitor.notify();
-            }
-        }).start();
 
-        new Thread(() -> {
-            synchronized(monitor) {
-                for (int i = 0; i < HALF; i++)
-                    secondHalf[i] = formula(secondHalf[i], i);
-                System.arraycopy(secondHalf, 0, array, HALF, HALF);
-                monitor.notify();
-            }
-        }).start();
-
-        new Thread(() -> {
+        Thread firstPart = new Thread(() -> {
+            for (int i = 0; i < HALF; i++)
+                firstHalf[i] = formula(firstHalf[i], i);
+            System.arraycopy(firstHalf, 0, array, 0, HALF);
             synchronized (monitor) {
+                isFirstReady.set(true);
+                monitor.notify();
+            }
+        });
+
+        Thread secondPart = new Thread(() -> {
+            for (int i = 0; i < HALF; i++)
+                secondHalf[i] = formula(secondHalf[i], i);
+            System.arraycopy(secondHalf, 0, array, HALF, HALF);
+            synchronized(monitor) {
+                isSecondReady.set(true);
+                monitor.notify();
+            }
+        });
+
+        Thread finalPart = new Thread(() -> {
                 try {
-                    monitor.wait();
+                    while(!isFirstReady.get() && !isSecondReady.get()) {
+                        synchronized (monitor) {
+                            monitor.wait();
+                        }
+                        System.out.println("Got notifier");
+                    }
                     System.out.printf("Two threads: %d ms\n", System.currentTimeMillis() - timer);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-            }
-        }).start();
+
+        });
+
+        firstPart.start();
+        secondPart.start();
+        finalPart.start();
     }
 
     private static float formula(float a, int b) {
