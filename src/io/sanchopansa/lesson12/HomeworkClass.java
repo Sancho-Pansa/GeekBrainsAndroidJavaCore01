@@ -61,11 +61,11 @@ public class HomeworkClass {
 
         Thread finalPart = new Thread(() -> {
                 try {
-                    while(!isFirstReady.get() && !isSecondReady.get()) {
+                    while(!isFirstReady.get() || !isSecondReady.get()) {
                         synchronized (monitor) {
                             monitor.wait();
+                            System.out.println("Got notifier");
                         }
-                        System.out.println("Got notifier");
                     }
                     System.out.printf("Two threads: %d ms\n", System.currentTimeMillis() - timer);
                 } catch (InterruptedException e) {
